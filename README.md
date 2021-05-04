@@ -2,14 +2,13 @@
 
 ### URLs
 
-[Pull Request](https://github.com/BasharNofal/RESTy-ph1/pull/5)\
-[Netlify](https://objective-curran-88d85d.netlify.app/)
+[Pull Request](https://github.com/BasharNofal/RESTy/pull/1)\
 
 <hr>
 
 ### UML Diagram
 
-![UML](./assets/RESTy-ph1.png)
+![UML](./assets/RESTy-ph2.png)
 
 <hr>
 
