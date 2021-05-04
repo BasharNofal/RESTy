@@ -1,4 +1,4 @@
-# RESTy ph1
+# RESTy
 
 ### URLs
 
