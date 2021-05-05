@@ -2,7 +2,7 @@
 
 ### URLs
 
-[Pull Request](https://github.com/BasharNofal/RESTy/pull/1)\
+[Pull Request](https://github.com/BasharNofal/RESTy/pull/4)
 
 <hr>
 
