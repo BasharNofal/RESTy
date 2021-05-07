@@ -1,18 +1,23 @@
 import React from 'react';
 import './Form.scss';
 
-let setOfRequestObjects = new Set();
-
-if (localStorage.length) {
-    setOfRequestObjects.add(JSON.parse(localStorage.getItem('requests')));
-}
-console.log({setOfRequestObjects});
 const Form = (props) => {
+    let arrOfRequestObjects = [];
+    let checkExists = 0;
+    let checkEmpty = 0;
     let requestObj = {};
 
+    if (localStorage.length) {
+        arrOfRequestObjects = JSON.parse(localStorage.getItem('requests'));
+    }
+
     const handleSubmit = async () => {
+        props.handler2();
+        // document.querySelector('button').click();
+
         let method;
         let rawData;
+        const body = document.querySelector('textarea').value;
         const url = document.querySelector('#urlInput').value;
         const radioButtons = document.getElementsByName('method');
         for (let index = 0; index < radioButtons.length; index++) {
@@ -29,7 +34,7 @@ const Form = (props) => {
                 const requestOptions = {
                     method,
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ title: 'RESTy' })
+                    body
                 }
                 rawData = await fetch(url, requestOptions);
             }
@@ -38,12 +43,26 @@ const Form = (props) => {
             }
 
             const formattedData = await rawData.json();
-            props.handler(formattedData);
-            requestObj = { method, url, body: formattedData };
+            requestObj = { method, url, body, response: formattedData };
+            props.handler2();
+            props.handler(requestObj);
 
-            if (!setOfRequestObjects.has(JSON.stringify(requestObj))) {
-                setOfRequestObjects.add(JSON.stringify(requestObj));
-                storeRequest(requestObj);
+            if (arrOfRequestObjects.length === 0) {
+                checkEmpty++;
+                arrOfRequestObjects.push(requestObj);
+                storeRequest();
+            } else {
+                for (let index = 0; index < arrOfRequestObjects.length; index++) {
+                    if (JSON.stringify(arrOfRequestObjects[index]) === JSON.stringify(requestObj)) {
+                        checkExists++;
+                        break;
+                    }
+                }
+            }
+            if (checkExists === 0 && checkEmpty === 0) {
+                console.log({ check: checkExists })
+                arrOfRequestObjects.push(requestObj);
+                storeRequest();
             }
         } catch (error) {
             props.handler(`You are not allowed to send ${method} request to ${url}`);
@@ -52,18 +71,27 @@ const Form = (props) => {
     }
 
     const storeRequest = () => {
-        console.log((setOfRequestObjects));
-        // JSON.parse(setOfRequestObjects);
-        let arrOfRequestObjects = Array.from(setOfRequestObjects);
-        // console.log({arrOfRequestObjects});
         localStorage.setItem('requests', JSON.stringify(arrOfRequestObjects));
     }
 
-    return (
+    const handleHistoryListClick = () => {
+        document.querySelector('#urlInput').value = props.prompt.url;
+        let methodButtons = document.getElementsByName('method');
+        methodButtons.forEach(btn => {
+            if (btn.defaultValue === props.prompt.method) {
+                btn.checked = true;
+            }
+        });
+    }
 
-        <div>
+    if (props.prompt) {
+        handleHistoryListClick();
+    }
+
+    return (
+        <div id="form">
             <input name="url" type="text" id="urlInput" placeholder="URL" />
-            <button onClick={handleSubmit}>{props.prompt}</button> <br />
+            <button onClick={handleSubmit}>Go</button> <br />
             <input type="radio" name="method" value="GET" />
             <label >GET</label>
             <input type="radio" name="method" value="POST" />
@@ -71,7 +99,8 @@ const Form = (props) => {
             <input type="radio" name="method" value="PUT" />
             <label >PUT</label>
             <input type="radio" name="method" value="DELETE" />
-            <label >DELETE</label>
+            <label >DELETE</label><br />
+            <textarea name="body" cols="40" rows="10" placeholder="Enter Request Body"></textarea>
         </div>
     );
 }
