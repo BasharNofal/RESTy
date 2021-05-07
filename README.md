@@ -2,13 +2,13 @@
 
 ### URLs
 
-[Pull Request](https://github.com/BasharNofal/RESTy/pull/1)\
+[Pull Request](https://github.com/BasharNofal/RESTy/pull/2)\
 
 <hr>
 
 ### UML Diagram
 
-![UML](./assets/RESTy-ph2.png)
+![UML](./assets/RESTy-ph3.png)
 
 <hr>
 
