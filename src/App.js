@@ -5,7 +5,7 @@ import Results from './components/results'
 import Footer from './components/footer';
 import React from 'react';
 import History from './components/history'
-import { If, Then, Else } from './components/if';
+import { If, Then } from './components/if';
 
 
 class App extends React.Component {
