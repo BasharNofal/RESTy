@@ -1,5 +1,6 @@
 {
-  "homepage": "https://basharnofal.github.io/RESTy/build/index.html",
+  "main": "src/index.js",
+  "homepage": "/",
   "name": "react-app",
   "version": "0.1.0",
   "private": true,
