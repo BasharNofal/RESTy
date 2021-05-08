@@ -1,0 +1,17 @@
+.history-div{
+    text-align: left;
+    float: left;
+    margin: 8% auto;
+}
+
+.history-list {
+    padding: 1%;
+    font-size: larger;
+    
+    &:hover{
+        cursor: pointer;
+        background-color: black;
+        color: white;
+    }
+}
+
