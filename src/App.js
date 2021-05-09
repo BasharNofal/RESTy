@@ -1,58 +1,28 @@
 import './App.scss';
-import Header from './components/header';
-import Form from './components/form';
-import Results from './components/results'
-import Footer from './components/footer';
 import React from 'react';
-import History from './components/history'
-import { If, Then } from './components/if';
+import Header from './components/header';
+import Home from './components/home'
+import Footer from './components/footer';
+import History from './components/history';
+import Help from './components/help';
+import { Route, Switch } from 'react-router-dom';
 
+const App = () => {
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { loading: false };
-  }
-
-  handleLoading = () => {
-    this.setState({loading: !this.state.loading});
-  }
-
-  handleForm = (requestObj) => {
-    this.setState({ data: requestObj });
-  }
-
-  handleHistoryListClick = (method, url) => {
-    let historyObj = { method, url };
-    this.setState({ historyObj });
-  }
-
-  render() {
-    return (
-      <>
-        <Header />
-        <main>
-          <Form prompt={this.state.historyObj} handler={this.handleForm} handler2={this.handleLoading} />
-          <If condition={localStorage.length}>
-            <Then>
-              <History prompt={JSON.parse(localStorage.getItem('requests'))} handler={this.handleHistoryListClick} />
-            </Then>
-          </If>
-          <If condition={this.state.loading}>
-            <Then>
-              Loading...
-            </Then>
-          </If>
-          <If condition={this.state.data} >
-            <Then>
-              <Results prompt={this.state.data} />
-            </Then>
-          </If>
-        </main>
-        <Footer />
-      </>
-    )
-  }
+  return (
+    <>
+      <Header />
+      <main>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/history" component={History} />
+          <Route path="/help" component={Help} />
+        </Switch>
+      </main>
+      <Footer />
+    </>
+  )
 }
+
 
 export default App;

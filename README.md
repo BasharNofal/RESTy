@@ -3,14 +3,14 @@
 ### URLs
 
 
-[Pull Request](https://github.com/BasharNofal/RESTy/pull/9)\
+[Pull Request](https://github.com/BasharNofal/RESTy/pull/10)\
 [Netlify](https://bn-resty.netlify.app/)
 
 <hr>
 
 ### UML Diagram
 
-![UML](./assets/RESTy-ph3.png)
+![UML](./assets/RESTy-ph4.png)
 
 <hr>
 
