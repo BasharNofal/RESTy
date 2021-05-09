@@ -1,8 +1,9 @@
 import './History.scss';
 import React from 'react';
 import { If, Then } from '../if';
-import JSONPretty from 'react-json-pretty';
-let JSONPrettyMon = require('react-json-pretty/dist/monikai');
+import ReactJson from 'react-json-view';
+// import JSONPretty from 'react-json-pretty';
+// let JSONPrettyMon = require('react-json-pretty/dist/monikai');
 
 class History extends React.Component {
     constructor(props) {
@@ -52,7 +53,8 @@ class History extends React.Component {
                         <div className="result">
                             <pre>
                                 {
-                                    <JSONPretty id="json-pretty" data={this.state.response} theme={JSONPrettyMon}></JSONPretty>
+                                    // <JSONPretty id="json-pretty" data={this.state.response} theme={JSONPrettyMon}></JSONPretty>
+                                    <ReactJson name={false} src={this.state.response} theme="monokai" />
                                 }
                             </pre>
                         </div>
