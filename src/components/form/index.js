@@ -13,7 +13,7 @@ const Form = (props) => {
 
     const handleSubmit = async () => {
         props.handler2();
-        // document.querySelector('button').click();
+
 
         let method;
         let rawData;
@@ -43,7 +43,14 @@ const Form = (props) => {
             }
 
             const formattedData = await rawData.json();
-            requestObj = { method, url, body, response: formattedData };
+            console.log(formattedData.headers)
+            requestObj = {
+                method, url, body, response: {
+                    header: { Content_Type: rawData.headers.get('Content-Type') },
+                    count: formattedData.count || 'count is unavailable',
+                    results: formattedData,
+                }
+            };
             props.handler2();
             props.handler(requestObj);
 
